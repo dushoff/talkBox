@@ -31,6 +31,7 @@ mirrors += img
 %.html: %.qmd
 	quarto render $< --to revealjs -M theme:moon -M slide-number:true \
 	--output $@
+Ignore +=  *.html *_files
 
 ######################################################################
 
