@@ -7,11 +7,19 @@ Ignore = target.mk
 vim_session:
 	bash -ic "vmt README.md"
 
+-include makestuff/pyvenv.mk
+-include makestuff/python.def
+pyvenv: ; $(cleanpyvenv)
+
 ## -include makestuff/perl.def
 
 ######################################################################
 
 Sources += $(wildcard *.md *.qmd)
+
+Ignore += *.QMD
+## hardFit.QMD: resources/hardFit.pptx
+%.QMD: resources/%.pptx | 
 
 ######################################################################
 
