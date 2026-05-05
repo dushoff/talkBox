@@ -19,7 +19,18 @@ Sources += $(wildcard *.md *.qmd)
 
 Ignore += *.QMD
 ## hardFit.QMD: resources/hardFit.pptx
-%.QMD: resources/%.pptx | 
+%.QMD: resources/%.pptx | pptx2md.pip
+	pptx2md $< --qmd --enable-slides -o $@
+
+.PRECIOUS: %.qmd
+%.qmd: | %.QMD
+	$(pcopy)
+
+## hardFit.html: hardFit.qmd
+mirrors += img
+%.html: %.qmd
+	quarto render $< --to revealjs -M theme:moon -M slide-number:true \
+	--output $@
 
 ######################################################################
 

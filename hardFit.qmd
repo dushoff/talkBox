@@ -1,0 +1,1380 @@
+---
+title: "Presentation Title"
+author: "Author"
+format: 
+  revealjs:
+    slide-number: c/t
+    width: 1600
+    height: 900
+    logo: img/logo.png
+    footer: "Organization"
+    incremental: true
+    theme: [simple]
+---
+![](img/hardFit_0.png)
+
+# Why fitting is hard and what to do about it
+
+__Seth Blumberg\, MD PhD__
+
+__University of Washington__
+
+_Contributors:_
+
+__Bobby Reiner\, PhD__
+
+__University of Washington__
+
+__Jonathan __  __Dushoff__  __\, PhD__
+
+__McMaster University__
+
+
+---
+
+
+![](img/hardFit_1.png)
+
+__Seth Blumberg\, MD PhD__
+
+__University of Washington__
+
+_Contributors:_
+
+__Bobby Reiner\, PhD__
+
+__University of Washington__
+
+__Jonathan __  __Dushoff__  __\, PhD__
+
+__McMaster University__
+
+
+---
+
+
+__Thinking about data __  <span style="color:#ffffff"> __2__ </span>
+
+__Data wrangling__  <span style="color:#ffffff"> __ 9__ </span>
+
+__Foundations of dynamic models and model structure:__
+
+__Variability\, sampling distributions & simulation __  <span style="color:#ffffff"> __10__ </span>
+
+__Introduction to infectious disease data __  <span style="color:#ffffff"> __1__ </span>
+
+__Introduction to statistical philosophy__  <span style="color:#ffffff"> __ 3__ </span>
+
+__†__  __ __  _Dynamical fever and model worlds _  <span style="color:#ffffff"> __1__ </span>
+
+__Public health\, epidemiology\, and models __  <span style="color:#ffffff"> __1__ </span>
+
+__Introduction to likelihood__  <span style="color:#ffffff"> __ 4__ </span>
+
+__Statistics and Data Science__
+
+__Introduction to dynamic modelling of infectious disease  I & II __  <span style="color:#ffffff"> __1__ </span>
+
+__‡__  __ Formulating research questions __  _ _  <span style="color:#ffffff"> __3__ </span>
+
+__‡ __  __Creating model worlds__  <span style="color:#ffffff"> __ 4__ </span>
+
+__‡ __  __Model description__  __& assumptions__  <span style="color:#ffffff"> __ 5__ </span>
+
+__Likelihood and model fitting__
+
+__i\.e\. Integration of data and models__
+
+__Life cycle of a __  __modelling project __  <span style="color:#ffffff"> __8__ </span>
+
+__Hidden assumptions of simple ODE models __  <span style="color:#ffffff"> __2__ </span>
+
+__Modelling for policy and in practice__
+
+__Modeling for policy __  <span style="color:#ffffff"> __11__ </span>
+
+__Fitting dynamic models __  __I & II  __  <span style="color:#ffffff"> __5 & 8__ </span>  __ __
+
+__† __  _HIV in Harare _  <span style="color:#ffffff"> __3__ </span>
+
+_Non exponential waiting times_
+
+__Breaking assumptions\!__
+
+__Mentor presentations __  <span style="color:#ffffff"> __5__ </span>
+
+__Consequences of heterogeneity and __  __modelling options__  <span style="color:#ffffff"> __ 3__ </span>
+
+__Introduction to MCMC __  <span style="color:#ffffff"> __9__ </span>
+
+__† __  _Application\-based tutorials_
+
+__Guest lectures  __  <span style="color:#ffffff"> __2 &10 __ </span>
+
+_† _  _Consequences of heterogeneity _  <span style="color:#ffffff"> __3__ </span>
+
+__Model assessment__  <span style="color:#ffffff"> __ __ </span>  <span style="color:#ffffff"> __10__ </span>
+
+__Introduction to stochastic models__  <span style="color:#ffffff"> __ 3__ </span>  __Discrete individuals__
+
+__‡__  __ __  __Poster presentations__  <span style="color:#ffffff"> __ 1 & 2__ </span>
+
+__ __  __‡ __  __Collaborative group projects__  <span style="color:#ffffff"> __ 6\-12__ </span>  __ __  __with presentations__  <span style="color:#ffffff"> __ 12__ </span>
+
+
+---
+
+
+![](img/hardFit_2.png)
+
+# Clostridioides difficile
+
+![](img/hardFit_3.png)
+
+![](img/hardFit_4.jpg)
+
+<span style="color:#000000">https://</span>  <span style="color:#000000">www\.nature\.com</span>  <span style="color:#000000">/articles/nrmicro2164</span>
+
+<span style="color:#000000">https://</span>  <span style="color:#000000">link\.springer\.com</span>  <span style="color:#000000">/article/10\.1007/s40121\-016\-0140\-z</span>
+
+
+---
+
+
+![](img/hardFit_5.png)
+
+
+---
+
+
+__Why would I get the wrong answer?__
+
+
+
+* Observation error
+  * Observational noise
+  * Data could be biased
+* Process error
+  * Dynamical noise
+* Model misspecification
+  * Population structure may be wrong
+  * Model dynamics may be wrong
+* Multi\-parameter estimation
+  * There may be different parameter combinations that work equally well
+  * Parameters may not be “identifiable”
+
+
+__Multiple errors at once is the norm\!__
+
+
+---
+
+
+__Motivating Example – observation error__
+
+![](img/hardFit_6.png)
+
+
+---
+
+
+__Observational noise__
+
+![](img/hardFit_7.png)
+
+![](img/hardFit_8.png)
+
+__Distribution of new cases on day 7__
+
+![](img/hardFit_9.png)
+
+
+---
+
+
+__Latent variables__
+
+
+
+* We model the  _observed_  variables
+  * E\.g\.\, reported cases\, estimated prevalence
+* Using  _unobserved_  latent variables
+  * True cases\, true prevalence\, true number of susceptibles
+* Requires a framework that can address the fact that our latent variables have many possible values for each observed variable
+
+---
+
+
+# Choosing a distribution for observation error
+
+__Finite __
+
+__population__
+
+Case counts are  _individuals_
+
+Poisson and binomial distributions do not reflect individual\-level variation
+
+
+---
+
+
+# The world is complicated
+
+![](img/hardFit_10.jpg)
+
+![](img/hardFit_11.jpg)
+
+![](img/hardFit_12.jpg)
+
+![](img/hardFit_13.jpg)
+
+::: {.notes}
+
+Networks can cause an amplification effect so that secondary transmission is stronger
+
+:::
+
+
+---
+
+
+# Choosing a distribution for observation error
+
+__Finite __
+
+__population__
+
+__Population\-level __
+
+__variation__
+
+Negative binomial
+
+
+---
+
+
+__Observational noise__
+
+![](img/hardFit_14.png)
+
+![](img/hardFit_15.png)
+
+__Distribution of new cases on day 7__
+
+![](img/hardFit_16.png)
+
+
+---
+
+
+__Dynamical noise \(process error\)__
+
+![](img/hardFit_17.png)
+
+![](img/hardFit_18.png)
+
+
+---
+
+
+__Dynamical noise \(process error\)__
+
+![](img/hardFit_19.png)
+
+![](img/hardFit_20.png)
+
+
+---
+
+
+__Thinking about data __  <span style="color:#ffffff"> __2__ </span>
+
+__Data wrangling__  <span style="color:#ffffff"> __ 9__ </span>
+
+__Foundations of dynamic models and model structure:__
+
+__Variability\, sampling distributions & simulation __  <span style="color:#ffffff"> __10__ </span>
+
+__Introduction to infectious disease data __  <span style="color:#ffffff"> __1__ </span>
+
+__Introduction to statistical philosophy__  <span style="color:#ffffff"> __ 3__ </span>
+
+__†__  __ __  _Dynamical fever and model worlds _  <span style="color:#ffffff"> __1__ </span>
+
+__Public health\, epidemiology\, and models __  <span style="color:#ffffff"> __1__ </span>
+
+__Introduction to likelihood__  <span style="color:#ffffff"> __ 4__ </span>
+
+__Statistics and Data Science__
+
+__Introduction to dynamic modelling of infectious disease  I & II __  <span style="color:#ffffff"> __1__ </span>
+
+__‡__  __ Formulating research questions __  _ _  <span style="color:#ffffff"> __3__ </span>
+
+__‡ __  __Creating model worlds__  <span style="color:#ffffff"> __ 4__ </span>
+
+__‡ __  __Model description__  __& assumptions__  <span style="color:#ffffff"> __ 5__ </span>
+
+__Likelihood and model fitting__
+
+__i\.e\. Integration of data and models__
+
+__Life cycle of a __  __modelling project __  <span style="color:#ffffff"> __8__ </span>
+
+__Hidden assumptions of simple ODE models __  <span style="color:#ffffff"> __2__ </span>
+
+__Modelling for policy and in practice__
+
+__Modeling for policy __  <span style="color:#ffffff"> __11__ </span>
+
+__Fitting dynamic models __  __I & II  __  <span style="color:#ffffff"> __5 & 8__ </span>  __ __
+
+__† __  _HIV in Harare _  <span style="color:#ffffff"> __3__ </span>
+
+_Non exponential waiting times_
+
+__Breaking assumptions\!__
+
+__Mentor presentations __  <span style="color:#ffffff"> __5__ </span>
+
+__Consequences of heterogeneity and __  __modelling options__  <span style="color:#ffffff"> __ 3__ </span>
+
+__Introduction to MCMC __  <span style="color:#ffffff"> __9__ </span>
+
+__† __  _Application\-based tutorials_
+
+__Guest lectures  __  <span style="color:#ffffff"> __2 &10 __ </span>
+
+_† _  _Consequences of heterogeneity _  <span style="color:#ffffff"> __3__ </span>
+
+__Model assessment__  <span style="color:#ffffff"> __ __ </span>  <span style="color:#ffffff"> __10__ </span>
+
+__Introduction to stochastic models__  <span style="color:#ffffff"> __ 3__ </span>  __Discrete individuals__
+
+__‡__  __ __  __Poster presentations__  <span style="color:#ffffff"> __ 1 & 2__ </span>
+
+__ __  __‡ __  __Collaborative group projects__  <span style="color:#ffffff"> __ 6\-12__ </span>  __ __  __with presentations__  <span style="color:#ffffff"> __ 12__ </span>
+
+
+---
+
+
+__Likelihood approaches \(technicalities\)__
+
+
+---
+
+
+__Observational and dynamical noise__
+
+![](img/hardFit_21.png)
+
+
+---
+
+
+__Observational and dynamical noise__
+
+![](img/hardFit_22.png)
+
+__Dealing with observation and process error at the same time is hard\!__
+
+
+---
+
+
+__Modern Computational Approaches__
+
+There is an ever\-increasing collection of advanced tools for model fitting\. A \(very\) partial list:
+
+
+
+  * __MCMC__
+  * __POMP – Partially observed Markov processes__
+  * __JAGS / __  __WinBUGS__  __ / BUGS / __  __OpenBUGS__
+  * __Stan__
+  * __BayesianTools__
+  * __Greta__
+  * __pymc3__
+  * __INLA – integrated nested Laplacian approximation__
+  * __TMB – template model builder__
+  * __ODIN/DUST__
+  * __Macpan__
+  * __Julia libraries \(Turing\, JL\)__
+
+---
+
+
+__Thinking about data __  <span style="color:#ffffff"> __2__ </span>
+
+__Data wrangling__  <span style="color:#ffffff"> __ 9__ </span>
+
+__Foundations of dynamic models and model structure:__
+
+__Variability\, sampling distributions & simulation __  <span style="color:#ffffff"> __10__ </span>
+
+__Introduction to infectious disease data __  <span style="color:#ffffff"> __1__ </span>
+
+__Introduction to statistical philosophy__  <span style="color:#ffffff"> __ 3__ </span>
+
+__†__  __ __  _Dynamical fever and model worlds _  <span style="color:#ffffff"> __1__ </span>
+
+__Public health\, epidemiology\, and models __  <span style="color:#ffffff"> __1__ </span>
+
+__Introduction to likelihood__  <span style="color:#ffffff"> __ 4__ </span>
+
+__Statistics and Data Science__
+
+__Introduction to dynamic modelling of infectious disease  I & II __  <span style="color:#ffffff"> __1__ </span>
+
+__‡__  __ Formulating research questions __  _ _  <span style="color:#ffffff"> __3__ </span>
+
+__‡ __  __Creating model worlds__  <span style="color:#ffffff"> __ 4__ </span>
+
+__‡ __  __Model description__  __& assumptions__  <span style="color:#ffffff"> __ 5__ </span>
+
+__Likelihood and model fitting__
+
+__i\.e\. Integration of data and models__
+
+__Life cycle of a __  __modelling project __  <span style="color:#ffffff"> __8__ </span>
+
+__Hidden assumptions of simple ODE models __  <span style="color:#ffffff"> __2__ </span>
+
+__Modelling for policy and in practice__
+
+__Modeling for policy __  <span style="color:#ffffff"> __11__ </span>
+
+__Fitting dynamic models __  __I & II  __  <span style="color:#ffffff"> __5 & 8__ </span>  __ __
+
+__† __  _HIV in Harare _  <span style="color:#ffffff"> __3__ </span>
+
+_Non exponential waiting times_
+
+__Breaking assumptions\!__
+
+__Mentor presentations __  <span style="color:#ffffff"> __5__ </span>
+
+__Consequences of heterogeneity and __  __modelling options__  <span style="color:#ffffff"> __ 3__ </span>
+
+__Introduction to MCMC __  <span style="color:#ffffff"> __9__ </span>
+
+__† __  _Application\-based tutorials_
+
+__Guest lectures  __  <span style="color:#ffffff"> __2 &10 __ </span>
+
+_† _  _Consequences of heterogeneity _  <span style="color:#ffffff"> __3__ </span>
+
+__Model assessment__  <span style="color:#ffffff"> __ __ </span>  <span style="color:#ffffff"> __10__ </span>
+
+__Introduction to stochastic models__  <span style="color:#ffffff"> __ 3__ </span>  __Discrete individuals__
+
+__‡__  __ __  __Poster presentations__  <span style="color:#ffffff"> __ 1 & 2__ </span>
+
+__ __  __‡ __  __Collaborative group projects__  <span style="color:#ffffff"> __ 6\-12__ </span>  __ __  __with presentations__  <span style="color:#ffffff"> __ 12__ </span>
+
+
+---
+
+
+__Model misspecification__
+
+![](img/hardFit_23.png)
+
+![](img/hardFit_24.png)
+
+
+---
+
+
+__Thinking about data __  <span style="color:#ffffff"> __2__ </span>
+
+__Data wrangling__  <span style="color:#ffffff"> __ 9__ </span>
+
+__Foundations of dynamic models and model structure:__
+
+__Variability\, sampling distributions & simulation __  <span style="color:#ffffff"> __10__ </span>
+
+__Introduction to infectious disease data __  <span style="color:#ffffff"> __1__ </span>
+
+__Introduction to statistical philosophy__  <span style="color:#ffffff"> __ 3__ </span>
+
+__†__  __ __  _Dynamical fever and model worlds _  <span style="color:#ffffff"> __1__ </span>
+
+__Public health\, epidemiology\, and models __  <span style="color:#ffffff"> __1__ </span>
+
+__Introduction to likelihood__  <span style="color:#ffffff"> __ 4__ </span>
+
+__Statistics and Data Science__
+
+__Introduction to dynamic modelling of infectious disease  I & II __  <span style="color:#ffffff"> __1__ </span>
+
+__‡__  __ Formulating research questions __  _ _  <span style="color:#ffffff"> __3__ </span>
+
+__‡ __  __Creating model worlds__  <span style="color:#ffffff"> __ 4__ </span>
+
+__‡ __  __Model description__  __& assumptions__  <span style="color:#ffffff"> __ 5__ </span>
+
+__Likelihood and model fitting__
+
+__i\.e\. Integration of data and models__
+
+__Life cycle of a __  __modelling project __  <span style="color:#ffffff"> __8__ </span>
+
+__Hidden assumptions of simple ODE models __  <span style="color:#ffffff"> __2__ </span>
+
+__Modelling for policy and in practice__
+
+__Modeling for policy __  <span style="color:#ffffff"> __11__ </span>
+
+__Fitting dynamic models __  __I & II  __  <span style="color:#ffffff"> __5 & 8__ </span>  __ __
+
+__† __  _HIV in Harare _  <span style="color:#ffffff"> __3__ </span>
+
+_Non exponential waiting times_
+
+__Breaking assumptions\!__
+
+__Mentor presentations __  <span style="color:#ffffff"> __5__ </span>
+
+__Consequences of heterogeneity and __  __modelling options__  <span style="color:#ffffff"> __ 3__ </span>
+
+__Introduction to MCMC __  <span style="color:#ffffff"> __9__ </span>
+
+__† __  _Application\-based tutorials_
+
+__Guest lectures  __  <span style="color:#ffffff"> __2 &10 __ </span>
+
+_† _  _Consequences of heterogeneity _  <span style="color:#ffffff"> __3__ </span>
+
+__Model assessment__  <span style="color:#ffffff"> __ __ </span>  <span style="color:#ffffff"> __10__ </span>
+
+__Introduction to stochastic models__  <span style="color:#ffffff"> __ 3__ </span>  __Discrete individuals__
+
+__‡__  __ __  __Poster presentations__  <span style="color:#ffffff"> __ 1 & 2__ </span>
+
+__ __  __‡ __  __Collaborative group projects__  <span style="color:#ffffff"> __ 6\-12__ </span>  __ __  __with presentations__  <span style="color:#ffffff"> __ 12__ </span>
+
+
+---
+
+
+__Multi\-parameter inference__
+
+Modern methods are already hard\, and when you try to fit more than one parameter at once\, you add considerable complexity
+
+Once you do multi\-parameter inference\, you may find that confidence intervals are very large – this may reflect the reality of knowledge\, but may not make you look good
+
+Parameter identifiability can be challenging\.
+
+![](img/hardFit_25.png)
+
+::: {.notes}
+
+Unmeasured heterogeneity may lead to the conclusion that observed variation in outcomes was due to stochasticity
+
+:::
+
+
+---
+
+
+A good fit is not necessarily a useful fit
+
+![](img/hardFit_26.png)
+
+Many tools for addressing overfitting including:
+
+Akaike Information Criterion \(AIC\)
+
+Bayesian Information Criterion
+
+Elastic Net
+
+Cross\-validation
+
+::: {.notes}
+
+Unmeasured heterogeneity may lead to the conclusion that observed variation in outcomes was due to stochasticity
+
+:::
+
+
+---
+
+
+__Personal philosophy: __ Don’t blame the data\!
+
+![](img/hardFit_27.jpg)
+
+
+
+  * See incomplete data as a modeling opportunity
+  * If there is enough data to tell you an answer with clarity\, you don’t need a model\!
+  * If data is insufficient\, modeling can help provide insight into efficient data collection
+::: {.notes}
+
+Unmeasured heterogeneity may lead to the conclusion that observed variation in outcomes was due to stochasticity
+
+:::
+
+
+---
+
+
+Making your fit into a likelihood clarifies assumptions and creates a foundation for statistical inference
+
+Accounting for both process and observation error is harder\, but there are a wealth of modern\, computational techniques to facilitate this
+
+Multi\-parameter inference can also be challenging\, particularly when data is limited\.  \(But Carl will talk about Markov Chain Monte Carlo techniques for this tomorrow\)
+
+
+---
+
+
+![](img/hardFit_28.jpg)
+
+
+---
+
+
+![](img/hardFit_29.png)
+
+# Why fitting is hard and what to do about it
+
+
+
+* <span style="color:#000000"> _C\. difficile_ </span>
+* <span style="color:#000000">Mpox trend</span>
+  * <span style="color:#000000">Observation error</span>
+* <span style="color:#000000">Trachoma elimination</span>
+  * <span style="color:#000000">Observation error\, process error\, </span> misspecification – Oh my\!
+* <span style="color:#000000">Measles emergence</span>
+  * <span style="color:#000000">Multi\-parameter estimation</span>
+
+---
+
+
+![](img/hardFit_30.png)
+
+
+
+* <span style="color:#7030a0"> _C\. difficile_ </span>
+* <span style="color:#000000">Mpox trend</span>
+  * <span style="color:#000000">Observation error</span>
+* <span style="color:#000000">Trachoma elimination</span>
+  * <span style="color:#000000">Observation error\, process error\, </span> misspecification – Oh my\!
+* <span style="color:#000000">Measles emergence</span>
+  * <span style="color:#000000">Multi\-parameter estimation</span>
+
+---
+
+
+![](img/hardFit_31.png)
+
+
+---
+
+
+# Reproduction number vs amplification
+
+![](img/hardFit_32.png)
+
+![](img/hardFit_33.png)
+
+Sometimes no formal adjustments of process / observation error or misspecification are needed\!
+
+
+---
+
+
+![](img/hardFit_34.png)
+
+# Why fitting is hard and what to do about it
+
+
+
+* <span style="color:#000000"> _C\. difficile_ </span>
+* <span style="color:#7030a0"> __Mpox trend__ </span>
+  * <span style="color:#7030a0"> __Observation error__ </span>
+* <span style="color:#000000">Trachoma elimination</span>
+  * <span style="color:#000000">Observation error\, process error\, </span> misspecification – Oh my\!
+* <span style="color:#000000">Measles emergence</span>
+  * <span style="color:#000000">Multi\-parameter estimation</span>
+
+---
+
+
+![](img/hardFit_35.png)
+
+![](img/hardFit_36.png)
+
+__Stuttering chains \(__  _R_  __0__  __<1\)__
+
+__Epidemics and persistence__
+
+__\(__  _R_  __0 __  __> 1\)__
+
+__Circulation in reservoir__
+
+__Cross\-species spillover__
+
+![](img/hardFit_37.png)
+
+Active
+
+Surveillance
+
+Rimoin et al\. PNAS 2010
+
+
+---
+
+
+![](img/hardFit_38.png)
+
+__Outbreak size is a marker of human transmissibility__
+
+
+---
+
+
+![](img/hardFit_40.png)
+
+__Outbreak size is a marker of human transmissibility__
+
+| 1980\-1984 | 2005\-2007 |
+| :-: | :-: |
+| Experienced\, well\-trained field teams | Relatively Inexperienced field team |
+| Well Funded | Limited Resources |
+| Monetary rewards for case identification | No financial rewards |
+| Retrospective case identification by contact tracing and serology | Case identification required sampling during active infection |
+
+![](img/hardFit_42.png)
+
+
+---
+
+
+![](img/hardFit_43.png)
+
+__Case detection Bias__
+
+Observed Infection
+
+__Perfect detection  \(Unrealistic\)__
+
+Detection Probability = 100%
+
+Observed mean outbreak size = 3\.5
+
+![](img/hardFit_44.gif)
+
+
+---
+
+
+![](img/hardFit_45.png)
+
+__Case detection Bias__
+
+Retrospectively identified
+
+Infection
+
+Observed Infection
+
+Unobserved Infection
+
+__Perfect detection  \(Unrealistic\)__
+
+Detection Probability = 100%
+
+Observed mean outbreak size = 3\.5
+
+![](img/hardFit_46.gif)
+
+__Size\-dependent \(1980\-86\)__
+
+Detection Probability = 72%
+
+Observed mean outbreak size = 5
+
+![](img/hardFit_47.gif)
+
+
+---
+
+
+![](img/hardFit_48.png)
+
+__Case detection Bias__
+
+Retrospectively identified
+
+Infection
+
+Observed Infection
+
+Unobserved Infection
+
+__Perfect detection  \(Unrealistic\)__
+
+Detection Probability = 100%
+
+Observed mean outbreak size = 3\.5
+
+![](img/hardFit_49.gif)
+
+__Size\-dependent \(1980\-86\)__
+
+Detection Probability = 72%
+
+Observed mean outbreak size = 5
+
+![](img/hardFit_50.gif)
+
+__Random \(2005\-07\)__
+
+Detection Probability = 43%
+
+Observed mean outbreak size = 3
+
+![](img/hardFit_51.gif)
+
+
+---
+
+
+![](img/hardFit_52.png)
+
+
+
+* <span style="color:#000000"> _C\. difficile_ </span>
+* <span style="color:#000000">Mpox trend</span>
+  * <span style="color:#000000">Observation error</span>
+* <span style="color:#7030a0"> __Trachoma elimination__ </span>
+  * <span style="color:#7030a0"> __Observation error\, process error\, __ </span>  <span style="color:#7030a0"> __misspecification – Oh my\!__ </span>
+* <span style="color:#000000">Measles emergence</span>
+  * <span style="color:#000000">Multi\-parameter estimation</span>
+
+---
+
+
+![](img/hardFit_53.png)
+
+https://www\.trachomaatlas\.org/
+
+
+---
+
+
+![](img/hardFit_54.jpg)
+
+
+---
+
+
+Global progress towards trachoma control:
+
+![](img/hardFit_55.jpg)
+
+But\, we’re not there yet …
+
+
+---
+
+
+# Data overview
+
+|  | __All data__ |
+| :-: | :-: |
+| __Years__ | __2004 \- 2023__ |
+| __Surveys / TF data points \(n\)__ | __7513__ |
+| __Trachomatous inflammation – Follicular __ |  |
+| Mean TF Prevalence % \(range\) | __9\.__  __1__  __ \(0 \- 80\.1\)__ |
+| Median TF Prevalence % \(IQR\) | __4\.__  __1__  __ \(1\.2 \- 11\.__  __7__  __\)__ |
+| __Trachomatous Trichiasis __ |  |
+| __Mean TT __ Prevalence %  __\(range\)__ | __0\.9 \(0 \- 23\.5\)__ |
+| Median TT Prevalence % \(IQR\) | __0\.3 \(0\.1 – 1\.0\)__ |
+| __Countries__ | __56__ |
+| __IUs represented__ | __3717__ |
+| __Rounds of MDA – mean \(range\)__ | __2\.3 \(0 \- 16\)__ |
+
+::: {.notes}
+
+Try diff kernel or explain the bump near zero (not at 0)
+
+:::
+
+
+---
+
+
+# Overview of methods
+
+Candidate models developed
+
+<span style="color:#0b5394"> __As new data becomes available__ </span>
+
+Models trained on training dataset
+
+\(2004 \- 2018\)
+
+<span style="color:#0b5394">Models re\-trained with updated data</span>
+
+Models scored & weights derived based on the scoring dataset \(2019 \- 2021\)
+
+<span style="color:#0b5394">Models re\-scores & updated weights derived</span>
+
+Models and ensemble retrained on training and scoring datasets \(2004 \- 2021\)
+
+Ensemble performance assessedbased on evaluation dataset \(2022 \- 2023\)
+
+
+---
+
+
+# Model weights (2019-21)
+
+![](img/hardFit_56.png)
+
+![](img/hardFit_57.png)
+
+
+---
+
+
+![](img/hardFit_58.png)
+
+<span style="color:#7030a0">Feasibility assessment for achieving WHO 2030 goals for global elimination as a public health problem\.</span>
+
+<span style="color:#7030a0">District\-specific treatment and surveillance recommendations – even in districts where recent surveillance is not available</span>
+
+<span style="color:#7030a0">Impact evaluation of specific disease control programs \(e\.g\.\, Accelerate\)</span>
+
+<span style="color:#7030a0">Scientific insight into importance of geographic\, programmatic\, and environmental features</span>
+
+<span style="color:#7030a0">Insight into  whether apparent disease re\-emergence is true re\-emergence or noise artifact</span>
+
+::: {.notes}
+
+Amhara and Oromia
+
+:::
+
+
+---
+
+
+![](img/hardFit_59.png)
+
+# Why fitting is hard and what to do about it
+
+
+
+* <span style="color:#000000"> _C\. difficile_ </span>
+* <span style="color:#000000">Mpox trend</span>
+  * <span style="color:#000000">Observation error</span>
+* <span style="color:#000000">Trachoma elimination</span>
+  * <span style="color:#000000">Observation error\, process error\, </span> misspecification – Oh my\!
+* <span style="color:#7030a0"> __Measles emergence__ </span>
+  * <span style="color:#7030a0"> __Multi\-parameter estimation__ </span>
+
+---
+
+
+# Chain size data for measles in the U.S.
+
+|  | Isolated cases | 2 cases | 3\-5 cases | >5 cases |
+| :-: | :-: | :-: | :-: | :-: |
+| 2002 | 21 | 2 | 2 | 1 |
+| 2003 | 23 | 3 | 1 | 2 |
+| 2004 | 14 | 5 | 1 | 1 |
+| 2005 | 18 | 4 | 2 | 1 |
+| 2006 | 26 | 1 | 3 | 1 |
+| 2007 | 21 | 2 | 3 | 1 |
+| 2008 | 27 | 3 | 3 | 6 |
+| 2009 | 17 | 3 | 4 | 4 |
+| 2010 | 37 | 6 | 4 | 0 |
+| 2011 | 82 | 12 | 8 | 8 |
+
+
+---
+
+
+__Number of chains__
+
+# Inference of transmission parameters
+
+Branching
+
+process
+
+theory
+
+Maximum likelihood estimation provides:
+
+Effective reproductive number
+
+Average chain size
+
+Dispersion parameter
+
+Probability of an outbreak \(> 3 cases\)
+
+
+---
+
+
+# Chain size distribution
+
+![](img/hardFit_70.png)
+
+__More __
+
+__superspreading__
+
+![](img/hardFit_71.png)
+
+<span style="color:#17375e"> __Homogeneous__ </span>
+
+<span style="color:#17375e"> __transmission__ </span>
+
+The use of a negative binomial distribution to describe the transmission potential of an individual case allows variability in both the strength and heterogeneity of transmission\.
+
+
+---
+
+
+# Measles USA (2002-2011)
+
+![](img/hardFit_72.png)
+
+Homogenous
+
+spread
+
+<span style="color:#7030a0">Superspreading</span>
+
+<span style="color:#7030a0">capacity</span>
+
+<span style="color:#17375e">To match the data\, models must incorporate both the</span>
+
+<span style="color:#17375e">strength AND the heterogeneity of transmission</span>
+
+
+---
+
+
+![](img/hardFit_73.png)
+
+<span style="color:#17375e">To match the data\, models must incorporate both the</span>
+
+<span style="color:#17375e">strength AND the heterogeneity of transmission</span>
+
+
+---
+
+
+# Stable vaccine coverage is crucial!
+
+![](img/hardFit_74.png)
+
+
+---
+
+
+|  | __Benefit__ | __Weakness__ |
+| :-: | :-: | :-: |
+| __Purpose__ | Good for selecting models with better predictive performance | Not intended to identify the “true” model |
+| __Model Fit__ | Penalizes complexity to avoid overfitting | May still favor overly complex models\, especially in large samples |
+| __Flexibility__ | Can be used across a wide range of models | Assumes likelihood is correctly specified |
+| __Priors__ | Frequentist approach—no prior assumptions required | Doesn’t incorporate prior knowledge \(unlike Bayesian approaches\) |
+
+![](img/hardFit_75.png)
+
+::: {.notes}
+
+Unmeasured heterogeneity may lead to the conclusion that observed variation in outcomes was due to stochasticity
+
+:::
+
+
+---
+
+
+# United States vs Canada
+
+
+---
+
+
+__Thinking about data __  <span style="color:#ffffff"> __2__ </span>
+
+__Data wrangling__  <span style="color:#ffffff"> __ 9__ </span>
+
+__Foundations of dynamic models and model structure:__
+
+__Variability\, sampling distributions & simulation __  <span style="color:#ffffff"> __10__ </span>
+
+__Introduction to infectious disease data __  <span style="color:#ffffff"> __1__ </span>
+
+__Introduction to statistical philosophy__  <span style="color:#ffffff"> __ 3__ </span>
+
+__†__  __ __  _Dynamical fever and model worlds _  <span style="color:#ffffff"> __1__ </span>
+
+__Public health\, epidemiology\, and models __  <span style="color:#ffffff"> __1__ </span>
+
+__Introduction to likelihood__  <span style="color:#ffffff"> __ 4__ </span>
+
+__Statistics and Data Science__
+
+__Introduction to dynamic modelling of infectious disease  I & II __  <span style="color:#ffffff"> __1__ </span>
+
+__‡__  __ Formulating research questions __  _ _  <span style="color:#ffffff"> __3__ </span>
+
+__‡ __  __Creating model worlds__  <span style="color:#ffffff"> __ 4__ </span>
+
+__‡ __  __Model description__  __& assumptions__  <span style="color:#ffffff"> __ 5__ </span>
+
+__Likelihood and model fitting__
+
+__i\.e\. Integration of data and models__
+
+__Life cycle of a __  __modelling project __  <span style="color:#ffffff"> __8__ </span>
+
+__Hidden assumptions of simple ODE models __  <span style="color:#ffffff"> __2__ </span>
+
+__Modelling for policy and in practice__
+
+__Modeling for policy __  <span style="color:#ffffff"> __11__ </span>
+
+__Fitting dynamic models __  __I & II  __  <span style="color:#ffffff"> __5 & 8__ </span>  __ __
+
+__† __  _HIV in Harare _  <span style="color:#ffffff"> __3__ </span>
+
+_Non exponential waiting times_
+
+__Breaking assumptions\!__
+
+__Mentor presentations __  <span style="color:#ffffff"> __5__ </span>
+
+__Consequences of heterogeneity and __  __modelling options__  <span style="color:#ffffff"> __ 3__ </span>
+
+__Introduction to MCMC __  <span style="color:#ffffff"> __9__ </span>
+
+__† __  _Application\-based tutorials_
+
+__Guest lectures  __  <span style="color:#ffffff"> __2 &10 __ </span>
+
+_† _  _Consequences of heterogeneity _  <span style="color:#ffffff"> __3__ </span>
+
+__Model assessment__  <span style="color:#ffffff"> __ __ </span>  <span style="color:#ffffff"> __10__ </span>
+
+__Introduction to stochastic models__  <span style="color:#ffffff"> __ 3__ </span>  __Discrete individuals__
+
+__‡__  __ __  __Poster presentations__  <span style="color:#ffffff"> __ 1 & 2__ </span>
+
+__ __  __‡ __  __Collaborative group projects__  <span style="color:#ffffff"> __ 6\-12__ </span>  __ __  __with presentations__  <span style="color:#ffffff"> __ 12__ </span>
+
+
+---
+
+
+__Thinking about data __  <span style="color:#ffffff"> __2__ </span>
+
+__Data wrangling__  <span style="color:#ffffff"> __ 9__ </span>
+
+__Foundations of dynamic models and model structure:__
+
+__Variability\, sampling distributions & simulation __  <span style="color:#ffffff"> __10__ </span>
+
+__Introduction to infectious disease data __  <span style="color:#ffffff"> __1__ </span>
+
+__Introduction to statistical philosophy__  <span style="color:#ffffff"> __ 3__ </span>
+
+__†__  __ __  _Dynamical fever and model worlds _  <span style="color:#ffffff"> __1__ </span>
+
+__Public health\, epidemiology\, and models __  <span style="color:#ffffff"> __1__ </span>
+
+__Introduction to likelihood__  <span style="color:#ffffff"> __ 4__ </span>
+
+__Statistics and Data Science__
+
+__Introduction to dynamic modelling of infectious disease  I & II __  <span style="color:#ffffff"> __1__ </span>
+
+__‡__  __ Formulating research questions __  _ _  <span style="color:#ffffff"> __3__ </span>
+
+__‡ __  __Creating model worlds__  <span style="color:#ffffff"> __ 4__ </span>
+
+__‡ __  __Model description__  __& assumptions__  <span style="color:#ffffff"> __ 5__ </span>
+
+__Likelihood and model fitting__
+
+__i\.e\. Integration of data and models__
+
+__Life cycle of a __  __modelling project __  <span style="color:#ffffff"> __8__ </span>
+
+__Hidden assumptions of simple ODE models __  <span style="color:#ffffff"> __2__ </span>
+
+__Modelling for policy and in practice__
+
+__Modeling for policy __  <span style="color:#ffffff"> __11__ </span>
+
+__Fitting dynamic models __  __I & II  __  <span style="color:#ffffff"> __5 & 8__ </span>  __ __
+
+__† __  _HIV in Harare _  <span style="color:#ffffff"> __3__ </span>
+
+_Non exponential waiting times_
+
+__Breaking assumptions\!__
+
+__Mentor presentations __  <span style="color:#ffffff"> __5__ </span>
+
+__Consequences of heterogeneity and __  __modelling options__  <span style="color:#ffffff"> __ 3__ </span>
+
+__Introduction to MCMC __  <span style="color:#ffffff"> __9__ </span>
+
+__† __  _Application\-based tutorials_
+
+__Guest lectures  __  <span style="color:#ffffff"> __2 &10 __ </span>
+
+_† _  _Consequences of heterogeneity _  <span style="color:#ffffff"> __3__ </span>
+
+__Model assessment__  <span style="color:#ffffff"> __ __ </span>  <span style="color:#ffffff"> __10__ </span>
+
+__Introduction to stochastic models__  <span style="color:#ffffff"> __ 3__ </span>  __Discrete individuals__
+
+__‡__  __ __  __Poster presentations__  <span style="color:#ffffff"> __ 1 & 2__ </span>
+
+__ __  __‡ __  __Collaborative group projects__  <span style="color:#ffffff"> __ 6\-12__ </span>  __ __  __with presentations__  <span style="color:#ffffff"> __ 12__ </span>
+
+
+---
+
+
+
+
+* <span style="color:#002060">Meaningful fitting requires:</span>
+  * <span style="color:#7030a0">Contextualized understanding of the  research question and impact of modeling results</span>
+  * <span style="color:#0070c0">Quantitative understanding of data sources\, limitations and biases</span>
+  * <span style="color:#00a7b0">Humble consideration of model assumptions and weaknesses</span>
+  * <span style="color:#00b050">Patience\!</span>
+
+---
+
+
+__Make\-up sessions__
+
+<span style="color:#7030a0"> __Tonight 7:00 – 8:00 PM__ </span>
+
+<span style="color:#7030a0"> __Tomorrow 7:00 \- 7:45 AM__ </span>
+
+<span style="color:#7030a0"> __Tonight 7:00 – 8:00 PM__ </span>
+
+<span style="color:#7030a0"> __Wednesday 7:00 – 8:00 PM__ </span>
+
+![](img/hardFit_77.jpg)
+
+![](img/hardFit_78.png)
+
+![](img/hardFit_79.jpg)
+
+
+---
+
+
+![](img/hardFit_80.png)
+
+![](img/hardFit_81.png)
+
+__This presentation is made available through a Creative Commons Attribution\-Noncommercial license\. Details  of the license and permitted uses are available at__
+
+<span style="color:#0563c1"> _[http://creativecommons\.org/licenses/by/3\.0/](http://creativecommons.org/licenses/by/3.0/)_ </span>
+
+__© __  _2014\-2023 _  __International Clinics on Infectious Disease Dynamics and Data__
+
+<span style="color:#0563c1"> _Thumbi_ </span>  <span style="color:#0563c1"> _ SM\, Bruce F\, Bellan SE\, Pulliam JRCP\. “Introduction to Infectious Disease Data” Clinic on the Meaningful Modeling of _ </span>  <span style="color:#0563c1"> </span>  <span style="color:#0563c1"> _Epidemiological Data\. https://_ </span>  <span style="color:#0563c1"> _doi\.org_ </span>  <span style="color:#0563c1"> _/10\.6084/m9\.figshare\.5044603\.v4_ </span>
+
+__Attribution:__
+
+__Thumbi__  __ SM\, Bruce F\, Bellan SE\, Pulliam JRCP__
+
+__Clinic on the Meaningful Modeling of Epidemiological Data__
+
+__Source URL:__
+
+<span style="color:#0563c1"> _https://_ </span>  <span style="color:#0563c1"> _doi\.org_ </span>  <span style="color:#0563c1"> _/10\.6084/m9\.figshare\.5044603\.v4_ </span>
+
+__For further information please contact __  <span style="color:#0563c1"> _[figshare@ici3d\.org](mailto:figshare@ici3d.org)_ </span>  _[\.](mailto:figshare@ici3d.org)_
+
+![](img/hardFit_82.png)
+
+![](img/hardFit_83.png)
+
+![](img/hardFit_84.png)
+
+
+---
+
+
+__Robustness of conclusions__
+
+Why do we fit models to data in infectious disease epidemiology?
+
+In most contexts\, the final goal is to evaluate options for reducing disease to improve public health\.
+
+We know every model is wrong\. The question here is: “are the simplifying assumptions of our model leading us to the wrong conclusion”?
+
+Specifically\, consider conclusions that focus on intervention comparisons and optimal intervention design\.
+
+::: {.notes}
+
+[ASK STUDENTS: WHAT ARE SOME UNREALISTIC ASSUMPTIONS OF SIMPLE MODELS THAT WE’VE DISCUSSED THIS WEEK?]
+
+
+:::
+
+
+---
+
+
+__Robustness of conclusions__
+
+How to assess “robustness” of your conclusions:
+
+Try to parameterize your model with different data sets\. Do the eventual intervention recommendations change?
+
+Try to add more complexity \(that you think is important\) to your model and re\-fit\. Do the eventual intervention recommendations change?
+
+_Validate the inference\, _  _not the model or method you’re working with_
+
+
+---
+
+
+
+
+* We need  __dynamics__  to understand links between processes and outcomes
+  * How do things work?
+* We need  __statistics__  to understand uncertainty
+  * What can we learn from  _data_
+
+---
+
+
+When deciding on the complexity of our model world\, we must consider  __what__  we will use our model for\.
+
+If we made different choices\, would resulting policy recommendations change drastically?
+
+If we ignore key features of reality\, our model may fit our data well\, but misrepresent the relative and absolute impact of various interventions\.
+
+::: {.notes}
+
+2) through time or between individuals
+
+:::
+
